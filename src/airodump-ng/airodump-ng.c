@@ -4771,10 +4771,11 @@ static THREAD_ENTRY(gps_tracker_thread)
 					continue;
 				}
 
-				// Send ?WATCH={"json":true};
+				// Send ?WATCH={"json":true}
+				// NO SEMICOLON, READ THE API DOCUMENTATION FOR GPSD
 				memset(line, 0, sizeof(line));
-				strcpy(line, "?WATCH={\"json\":true};\n");
-				if (send(gpsd_sock, line, 22, 0) != 22) continue;
+				strcpy(line, "?WATCH={\"json\":true}\n");
+				if (send(gpsd_sock, line, 21, 0) != 21) continue;
 			}
 		}
 		else if (is_json < 0)
